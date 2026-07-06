@@ -154,12 +154,17 @@ with st.sidebar:
     selected_model = st.selectbox(
         "🧠 Pilih Model AI:",
         [
+            "gemini-2.5-flash", 
+            "gemini-2.0-flash-exp",
             "gemini-1.5-pro-latest", 
+            "gemini-1.5-pro",
             "gemini-1.5-flash-latest", 
+            "gemini-1.5-flash",
             "gemini-1.5-flash-8b-latest",
+            "gemini-1.5-flash-8b",
             "gemini-1.0-pro-latest"
         ],
-        index=0,
+        index=1,
     )
     
     st.markdown("""
@@ -167,20 +172,21 @@ with st.sidebar:
     <div style="text-align: center; margin-bottom: 10px; color:#8B5CF6;"><i class="fa-solid fa-chart-pie"></i> <b>Rate Limits (Free Tier)</b></div>
     
     <div style="margin-bottom: 12px;">
-    <span class="badge" style="background: rgba(248, 113, 113, 0.2); color: #F87171;"><i class="fa-solid fa-brain"></i> 1.5 Pro</span><br>
+    <span class="badge" style="background: rgba(248, 113, 113, 0.2); color: #F87171;"><i class="fa-solid fa-brain"></i> Gemini Pro (1.5 / 1.0)</span><br>
     <i class="fa-solid fa-battery-quarter" style="color:#64748B; width:15px;"></i> <b>50</b> req/hari<br>
     <i class="fa-solid fa-stopwatch" style="color:#64748B; width:15px;"></i> 2 req/menit<br>
     </div>
     
     <div style="margin-bottom: 12px;">
-    <span class="badge" style="background: rgba(52, 211, 153, 0.2); color: #34D399;"><i class="fa-solid fa-bolt"></i> 1.5 Flash</span><br>
+    <span class="badge" style="background: rgba(52, 211, 153, 0.2); color: #34D399;"><i class="fa-solid fa-bolt"></i> Gemini Flash (2.0 / 1.5)</span><br>
     <i class="fa-solid fa-battery-full" style="color:#64748B; width:15px;"></i> <b>1.500</b> req/hari<br>
     <i class="fa-solid fa-stopwatch" style="color:#64748B; width:15px;"></i> 15 req/menit<br>
     </div>
     
     <div>
-    <span class="badge" style="background: rgba(96, 165, 250, 0.2); color: #60A5FA;"><i class="fa-solid fa-feather"></i> 1.5 Flash-8B</span><br>
+    <span class="badge" style="background: rgba(96, 165, 250, 0.2); color: #60A5FA;"><i class="fa-solid fa-feather"></i> Flash 8B</span><br>
     <i class="fa-solid fa-battery-full" style="color:#64748B; width:15px;"></i> <b>1.500</b> req/hari<br>
+    <i class="fa-solid fa-stopwatch" style="color:#64748B; width:15px;"></i> 15 req/menit<br>
     </div>
     </div>
     """, unsafe_allow_html=True)
