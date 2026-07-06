@@ -16,8 +16,9 @@ st.set_page_config(
 
 # --- INJEKSI KUSTOM CSS & FONTAWESOME (PREMIUM UI) ---
 st.markdown("""
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 /* Background keseluruhan web */
 .stApp {
     background-color: #0B1121; /* Slate 950 */
@@ -188,17 +189,17 @@ model = genai.GenerativeModel(
 
 # Pesan Welcome Screen (Jika history kosong)
 welcome_msg = """
-### <i class="fa-solid fa-hand-sparkles" style="color:#FBBF24;"></i> Halo Bos!
+### 🌟 Halo Bos!
 
 Saya **PRAYCHATBOT**, AI Assistant premium yang siap bantu Bos hari ini.
 
 <div style="display:flex; gap: 20px; margin-top: 15px;">
     <div style="background: rgba(59,130,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(59,130,246,0.2); flex: 1;">
-        <h4 style="margin-top:0; color:#60A5FA;"><i class="fa-solid fa-code"></i> Coding</h4>
+        <h4 style="margin-top:0; color:#60A5FA;">💻 Coding</h4>
         <span style="font-size:0.9em; color:#CBD5E1;">Fix bug, bikin web, review code Python/Next.js.</span>
     </div>
     <div style="background: rgba(139,92,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(139,92,246,0.2); flex: 1;">
-        <h4 style="margin-top:0; color:#A78BFA;"><i class="fa-brands fa-ethereum"></i> Web3</h4>
+        <h4 style="margin-top:0; color:#A78BFA;">⛓️ Web3</h4>
         <span style="font-size:0.9em; color:#CBD5E1;">Riset airdrop, bedah smart contract, crypto alpha.</span>
     </div>
 </div>
