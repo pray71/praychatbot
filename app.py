@@ -28,7 +28,7 @@ st.markdown("""
 
 /* Sidebar Glass-morphism */
 [data-testid="stSidebar"] {
-    background-color: rgba(15, 23, 42, 0.7) !important;
+    background-color: rgba(15, 23, 42, 0.85) !important;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
@@ -105,24 +105,46 @@ div[data-testid="stChatInput"]:focus-within {
 
 # --- SIDEBAR MENU ---
 with st.sidebar:
-    st.markdown("<h2 style='text-align: center; color: #F8FAFC;'>⚙️ Pengaturan</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: #F8FAFC;'>⚙️ Pengaturan LLM</h2>", unsafe_allow_html=True)
     st.markdown("---")
     
     selected_model = st.selectbox(
-        "Pilih Model AI:",
-        ["gemini-1.5-pro-latest", "gemini-1.5-flash-latest"],
+        "Pilih Model AI (Google Gemini):",
+        [
+            "gemini-1.5-pro-latest", 
+            "gemini-1.5-flash-latest", 
+            "gemini-1.5-flash-8b-latest",
+            "gemini-1.0-pro-latest"
+        ],
         index=0,
-        help="Pilih otak AI yang mau digunakan."
+        help="Model menentukan kecerdasan dan batasan limit akun Anda."
     )
     
     st.markdown("""
-    <div style="font-size: 0.85em; color: #94A3B8; margin-bottom: 20px;">
-    <b>Keterangan Model:</b><br>
-    🔹 <b>1.5 Pro:</b> Paling cerdas & detail. Cocok untuk coding/analisis.<br>
-    ⚡ <b>1.5 Flash:</b> Cepat & responsif. Cocok untuk ngobrol santai.
+    <div style="font-size: 0.82em; color: #94A3B8; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+    <b>📊 Rate Limits (Free Tier AI Studio):</b><br><br>
+    
+    <span style="color: #F87171;"><b>1.5 Pro</b> (Paling Pintar)</span><br>
+    • Limit Harian: <b>50 request / hari</b><br>
+    • Limit Menit: 2 request / menit<br>
+    • Token: 32K token / menit<br>
+    <i>*Sangat ketat, gunakan hanya untuk tugas kompleks/coding.</i><br><br>
+    
+    <span style="color: #34D399;"><b>1.5 Flash</b> (Paling Seimbang)</span><br>
+    • Limit Harian: <b>1.500 request / hari</b><br>
+    • Limit Menit: 15 request / menit<br>
+    • Token: 1 Juta token / menit<br>
+    <i>*Limit lega, ngebut, performa mantap.</i><br><br>
+    
+    <span style="color: #60A5FA;"><b>1.5 Flash-8B</b> (Paling Ringan)</span><br>
+    • Limit Harian: <b>1.500 request / hari</b><br>
+    • Limit Menit: 15 request / menit<br>
+    • Token: 1 Juta token / menit<br>
+    <i>*Super kencang untuk chat harian biasa.</i>
     </div>
     """, unsafe_allow_html=True)
     
+    st.markdown("---")
     if st.button("🗑️ Bersihkan Obrolan", use_container_width=True):
         st.session_state.messages = [
             {"role": "model", "content": "Halo Bos! PRAYCHATBOT siap bantu nih. Ada yang mau diobrolin?"}
@@ -131,7 +153,7 @@ with st.sidebar:
 
 # UI Header
 st.markdown("<h1 class='title-gradient'>✨ PRAYCHATBOT</h1>", unsafe_allow_html=True)
-st.markdown(f"<p class='subtitle'>Powered by {selected_model}</p>", unsafe_allow_html=True)
+st.markdown(f"<p class='subtitle'>Powered by <b>{selected_model}</b></p>", unsafe_allow_html=True)
 
 # --- SETUP API GEMINI ---
 api_key = os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
