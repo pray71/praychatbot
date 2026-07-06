@@ -126,6 +126,26 @@ div[data-testid="stChatInput"]:focus-within {
 </style>
 """, unsafe_allow_html=True)
 
+# Pesan Welcome Screen (Jika history kosong)
+welcome_msg = """
+### 🌟 Halo Bos!
+
+Saya **PRAYCHATBOT**, AI Assistant premium yang siap bantu Bos hari ini.
+
+<div style="display:flex; gap: 20px; margin-top: 15px;">
+    <div style="background: rgba(59,130,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(59,130,246,0.2); flex: 1;">
+        <h4 style="margin-top:0; color:#60A5FA;">💻 Coding</h4>
+        <span style="font-size:0.9em; color:#CBD5E1;">Fix bug, bikin web, review code Python/Next.js.</span>
+    </div>
+    <div style="background: rgba(139,92,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(139,92,246,0.2); flex: 1;">
+        <h4 style="margin-top:0; color:#A78BFA;">⛓️ Web3</h4>
+        <span style="font-size:0.9em; color:#CBD5E1;">Riset airdrop, bedah smart contract, crypto alpha.</span>
+    </div>
+</div>
+
+<br>Ketik pertanyaan atau perintah Bos di bawah ya! 👇
+"""
+
 # --- SIDEBAR MENU ---
 with st.sidebar:
     st.markdown("<h2 style='text-align: center; color: #F8FAFC;'><i class='fa-solid fa-microchip' style='color:#3B82F6;'></i> Engine Settings</h2>", unsafe_allow_html=True)
@@ -167,7 +187,9 @@ with st.sidebar:
     
     st.markdown("---")
     if st.button("🗑️ Bersihkan Obrolan", use_container_width=True):
-        st.session_state.messages = [] # Kosongkan state untuk diisi ulang di bawah
+        st.session_state.messages = [
+            {"role": "model", "content": welcome_msg}
+        ]
         st.rerun()
 
 # UI Header
@@ -186,26 +208,6 @@ model = genai.GenerativeModel(
     selected_model,
     system_instruction="Kamu adalah asisten AI PRAYCHATBOT, yang cerdas, ahli di bidang IT & Web3, dan menggunakan bahasa gaul yang santai. Kamu memanggil user dengan sebutan 'Bos'."
 )
-
-# Pesan Welcome Screen (Jika history kosong)
-welcome_msg = """
-### 🌟 Halo Bos!
-
-Saya **PRAYCHATBOT**, AI Assistant premium yang siap bantu Bos hari ini.
-
-<div style="display:flex; gap: 20px; margin-top: 15px;">
-    <div style="background: rgba(59,130,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(59,130,246,0.2); flex: 1;">
-        <h4 style="margin-top:0; color:#60A5FA;">💻 Coding</h4>
-        <span style="font-size:0.9em; color:#CBD5E1;">Fix bug, bikin web, review code Python/Next.js.</span>
-    </div>
-    <div style="background: rgba(139,92,246,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(139,92,246,0.2); flex: 1;">
-        <h4 style="margin-top:0; color:#A78BFA;">⛓️ Web3</h4>
-        <span style="font-size:0.9em; color:#CBD5E1;">Riset airdrop, bedah smart contract, crypto alpha.</span>
-    </div>
-</div>
-
-<br>Ketik pertanyaan atau perintah Bos di bawah ya! 👇
-"""
 
 # Inisialisasi History Chat (session state)
 if "messages" not in st.session_state or len(st.session_state.messages) == 0:
@@ -261,4 +263,4 @@ if prompt := st.chat_input("Ketik pesan buat PRAYCHATBOT..."):
             st.session_state.messages.append({"role": "model", "content": full_response})
             
         except Exception as e:
-            st.error(f"<i class='fa-solid fa-triangle-exclamation'></i> Waduh Bos, ada error dari Gemini: {str(e)}", unsafe_allow_html=True)
+            st.error(f"Waduh Bos, ada error dari Gemini: {str(e)}", icon="⚠️")
