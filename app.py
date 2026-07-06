@@ -154,17 +154,12 @@ with st.sidebar:
     selected_model = st.selectbox(
         "🧠 Pilih Model AI:",
         [
-            "gemini-2.5-flash", 
             "gemini-2.0-flash-exp",
-            "gemini-1.5-pro-latest", 
             "gemini-1.5-pro",
-            "gemini-1.5-flash-latest", 
             "gemini-1.5-flash",
-            "gemini-1.5-flash-8b-latest",
-            "gemini-1.5-flash-8b",
-            "gemini-1.0-pro-latest"
+            "gemini-1.5-flash-8b"
         ],
-        index=1,
+        index=2,
     )
     
     st.markdown("""
@@ -269,4 +264,4 @@ if prompt := st.chat_input("Ketik pesan buat PRAYCHATBOT..."):
             st.session_state.messages.append({"role": "model", "content": full_response})
             
         except Exception as e:
-            st.error(f"Waduh Bos, ada error dari Gemini: {str(e)}", icon="⚠️")
+            st.error(f"Error Model '{selected_model}': {str(e)}", icon="⚠️")
