@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.8",
     "@ai-sdk/openai": "^0.0.36",
     "@ai-sdk/react": "^0.0.23",
     "@radix-ui/react-avatar": "^1.1.0",

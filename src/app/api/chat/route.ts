@@ -1,22 +1,21 @@
-import { createOpenAI } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
-export const maxDuration = 30;
-
-// Setup custom provider untuk connect ke 9router lokal
-const customProvider = createOpenAI({
-  baseURL: 'http://localhost:20128/v1',
-  apiKey: process.env.NINEROUTER_API_KEY || 'sk-4081c7ffcc504100bd772f915f06822a', // Gunakan key dummy jika env tidak ada
-});
+// Next.js config biar API route-nya jalan di Edge Runtime (lebih kenceng)
+export const runtime = 'edge';
 
 export async function POST(req: Request) {
+  // Ambil pesan dari request (history percakapan)
   const { messages } = await req.json();
 
+  // Panggil Gemini menggunakan ai-sdk
   const result = await streamText({
-    model: customProvider('WSL_PRAY') as any,
+    // Bos bisa ganti ke 'gemini-1.5-flash' kalo mau lebih cepet & murah
+    model: google('gemini-1.5-pro-latest'),
+    system: "Kamu adalah asisten AI PRAYCHATBOT, yang cerdas, menggunakan bahasa gaul yang santai. Kamu memanggil user dengan sebutan 'Bos'.",
     messages,
-    system: "You are an elite, premium AI Productivity Assistant named PrayChatBot created for Boss PRAY. You communicate professionally yet confidently. Your layout outputs are always clean. You help the user dominate tasks, debug code, and plan strategies efficiently. If asked who you are, state that you are PrayChatBot powered by 9Router WSL_PRAY model.",
   });
 
+  // Lempar kembali stream response-nya ke UI
   return result.toDataStreamResponse();
 }
