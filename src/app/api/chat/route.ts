@@ -11,11 +11,11 @@ export async function POST(req: Request) {
   // Panggil Gemini menggunakan ai-sdk
   const result = await streamText({
     // Bos bisa ganti ke 'gemini-1.5-flash' kalo mau lebih cepet & murah
-    model: google('gemini-1.5-pro-latest'),
+    model: google('gemini-1.5-pro-latest') as any,
     system: "Kamu adalah asisten AI PRAYCHATBOT, yang cerdas, menggunakan bahasa gaul yang santai. Kamu memanggil user dengan sebutan 'Bos'.",
     messages,
   });
 
   // Lempar kembali stream response-nya ke UI
-  return result.toDataStreamResponse();
+  return result.toTextStreamResponse();
 }
